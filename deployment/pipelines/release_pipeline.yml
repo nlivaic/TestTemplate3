@@ -40,7 +40,7 @@ jobs:
             definition: build_pipeline
             buildVersionToDownload: 'latest'
             artifactName: 'drop.TestTemplate3.Api'
-            project: 'TestTemplate3_ADO_Project'
+            project: 'SRD.TestTemplate3'
             downloadPath: '$(Pipeline.Workspace)/drop/TestTemplate3.Api'
 
         - task: DownloadPipelineArtifact@2
@@ -50,7 +50,7 @@ jobs:
             definition: build_pipeline
             buildVersionToDownload: 'latest'
             artifactName: 'drop.TestTemplate3.WorkerServices'
-            project: 'TestTemplate3_ADO_Project'
+            project: 'SRD.TestTemplate3'
             downloadPath: '$(Pipeline.Workspace)/drop/TestTemplate3.WorkerServices'
 
         - task: DownloadPipelineArtifact@2
@@ -60,7 +60,7 @@ jobs:
             definition: build_pipeline
             buildVersionToDownload: 'latest'
             artifactName: 'drop.TestTemplate3.Migrations'
-            project: 'TestTemplate3_ADO_Project'
+            project: 'SRD.TestTemplate3'
             downloadPath: '$(Pipeline.Workspace)/drop/TestTemplate3.Migrations'
 
         - script: dotnet $(Pipeline.Workspace)/drop/TestTemplate3.Migrations/TestTemplate3.Migrations.dll "$(ConnectionStrings__TestTemplate3Db_Migrations_Connection)" "$(DB_USER)" "$(DB_PASSWORD)" "$(Pipeline.Workspace)/drop/TestTemplate3.Migrations"
@@ -69,7 +69,7 @@ jobs:
         - task: AzureWebApp@1
           displayName: 'Deploy TestTemplate3.Api to App Service'
           inputs:
-            azureSubscription: 'AzureConnection_TestTemplate3'
+            azureSubscription: 'AzureConnection_TestTemplate2'
             appType: 'webAppLinux'
             appName: '$(app_service_web_name)'
             resourceGroupName: '$(rg)'
